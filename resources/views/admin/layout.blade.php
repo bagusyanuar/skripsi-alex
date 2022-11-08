@@ -34,7 +34,7 @@
 </nav>
 <aside class="main-sidebar sidebar-dark-primary elevation-1">
     <div class="sidebar">
-        <a href="/" class="brand-link">
+        <a href="{{ route('dashboard') }}" class="brand-link">
             <img src="{{ asset('assets/icon/logo.png') }}"
                  alt="AdminLTE Logo"
                  class="brand-image"
@@ -46,7 +46,7 @@
                 <nav class="mt-2 nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                      data-accordion="false">
                     <li class="nav-item">
-                        <a href="/"
+                        <a href="{{ route('dashboard') }}"
                            class="nav-link">
                             <i class="fa fa-tachometer nav-icon" aria-hidden="true"></i>
                             <p>Dashboard</p>
@@ -56,10 +56,31 @@
                         Master Data
                     </li>
                     <li class="nav-item">
-                        <a href="/jurusan"
+                        <a href="{{ route('jurusan.index') }}"
                            class="nav-link">
                             <i class="fa fa-tags nav-icon" aria-hidden="true"></i>
                             <p>Jurusan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('kelas.index') }}"
+                           class="nav-link">
+                            <i class="fa fa-bookmark nav-icon" aria-hidden="true"></i>
+                            <p>Kelas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('ruangan.index') }}"
+                           class="nav-link">
+                            <i class="fa fa-home nav-icon" aria-hidden="true"></i>
+                            <p>Ruangan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('sarana.index') }}"
+                           class="nav-link">
+                            <i class="fa fa-cubes nav-icon" aria-hidden="true"></i>
+                            <p>Sarana</p>
                         </a>
                     </li>
                 </nav>

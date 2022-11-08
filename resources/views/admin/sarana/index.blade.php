@@ -10,18 +10,18 @@
         </script>
     @endif
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Jurusan</p>
+        <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Sarana</p>
         <ol class="breadcrumb breadcrumb-transparent mb-0">
             <li class="breadcrumb-item">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Jurusan
+            <li class="breadcrumb-item active" aria-current="page">Sarana
             </li>
         </ol>
     </div>
     <div class="w-100 p-2">
         <div class="text-right mb-2 pr-3">
-            <a href="{{ route('jurusan.add_page') }}" class="btn btn-primary"><i class="fa fa-plus mr-1"></i><span
+            <a href="{{ route('sarana.add_page') }}" class="btn btn-primary"><i class="fa fa-plus mr-1"></i><span
                     class="font-weight-bold">Tambah</span></a>
         </div>
         <table id="table-data" class="display w-100 table table-bordered">
@@ -36,9 +36,9 @@
             @foreach($data as $v)
                 <tr>
                     <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
-                    <td>{{ $v->nama }}</td>
+                    <td>{{ $v->name }}</td>
                     <td class="text-center">
-                        <a href="{{ route('jurusan.edit', ['id' => $v->id]) }}" class="btn btn-sm btn-warning btn-edit"
+                        <a href="{{ route('sarana.edit', ['id' => $v->id]) }}" class="btn btn-sm btn-warning btn-edit"
                            data-id="{{ $v->id }}"><i class="fa fa-edit"></i></a>
                         <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="{{ $v->id }}"><i
                                 class="fa fa-trash"></i></a>
@@ -55,7 +55,7 @@
     <script src="{{ asset('/js/helper.js') }}"></script>
     <script type="text/javascript">
         function destroy(id) {
-            let url = '{{ route('jurusan.destroy') }}';
+            let url = '{{ route('sarana.destroy') }}';
             AjaxPost(url, {id}, function () {
                 window.location.reload();
             });
