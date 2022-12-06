@@ -23,5 +23,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () 
         Route::get('/{id}', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'detail']);
         Route::get('/{id}/sarana', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'available_stocks']);
         Route::post('/{id}/sarana/add', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'add_item']);
+        Route::match(['post', 'get'],'/{id}/sarana/keluar', [\App\Http\Controllers\Api\Admin\StockKeluarController::class, 'index']);
+        Route::match(['post', 'get'],'/{id}/sarana/masuk', [\App\Http\Controllers\Api\Admin\StockMasukController::class, 'index']);
     });
+
+
 });

@@ -53,3 +53,12 @@ Route::group(['prefix' => 'sarana'], function () {
     Route::post('/patch', [\App\Http\Controllers\Admin\SaranaController::class, 'patch'])->name('sarana.patch');
     Route::post('/destroy', [\App\Http\Controllers\Admin\SaranaController::class, 'destroy'])->name('sarana.destroy');
 });
+
+Route::group(['prefix' => 'persediaan'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\StockController::class, 'index'])->name('stock.index');
+});
+
+Route::group(['prefix' => 'persediaan-keluar'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\StockKeluarController::class, 'index'])->name('stock.keluar.index');
+    Route::get('/{id}', [\App\Http\Controllers\Admin\StockKeluarController::class, 'detail'])->name('stock.keluar.detail');
+});

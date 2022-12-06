@@ -24,7 +24,7 @@ class RuanganController extends CustomController
                 ->get();
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
-            return $this->jsonResponse('internal server error ' . $e->getMessage(), 200);
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
         }
     }
 
@@ -38,7 +38,7 @@ class RuanganController extends CustomController
             }
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
-            return $this->jsonResponse('internal server error ' . $e->getMessage(), 200);
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
         }
     }
 
@@ -50,7 +50,7 @@ class RuanganController extends CustomController
             }])->get();
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
-            return $this->jsonResponse('internal server error ' . $e->getMessage(), 200);
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
         }
     }
 
@@ -70,7 +70,7 @@ class RuanganController extends CustomController
             ]);
             return $this->jsonResponse('success', 200);
         } catch (\Exception $e) {
-            return $this->jsonResponse('internal server error ' . $e->getMessage(), 200);
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
         }
     }
 }

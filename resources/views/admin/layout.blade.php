@@ -83,6 +83,63 @@
                             <p>Sarana</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('stock.index') }}"
+                           class="nav-link {{ request()->is('persediaan') ? 'active' : ''}}">
+                            <i class="fa fa-archive nav-icon" aria-hidden="true"></i>
+                            <p>Persediaan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item has-treeview {{ request()->is('persediaan-keluar*') ? 'menu-open' : ''}}">
+                        <a href="#" class="nav-link {{ request()->is('persediaan-keluar*') ? 'active' : ''}}">
+                            <i class="nav-icon fa fa-upload"></i>
+                            <p>
+                                Stock Keluar
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('stock.keluar.index') }}"
+                                   class="nav-link {{ request()->is('persediaan-keluar') ? 'active' : ''}}">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Permintaan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#"
+                                   class="nav-link {{ request()->is('admin-satker/pengaduan') ? 'active' : ''}}">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Data</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview {{ request()->is('admin-satker/pengaduan*') ? 'menu-open' : ''}}">
+                        <a href="#" class="nav-link {{ request()->is('admin-satker/pengaduan*') ? 'active' : ''}}">
+                            <i class="nav-icon fa fa-download"></i>
+                            <p>
+                                Stock Masuk
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#"
+                                   class="nav-link {{ request()->is('admin-satker/pengaduan') ? 'active' : ''}}">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Permintaan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#"
+                                   class="nav-link {{ request()->is('admin-satker/pengaduan') ? 'active' : ''}}">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Data</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </nav>
             </ul>
         </div>
