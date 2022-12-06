@@ -15,4 +15,9 @@ class Sarana extends Model
         'name',
         'qty'
     ];
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class, 'sarana_id');
+    }
 }

@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+
+Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () {
+
+    Route::group(['prefix' => 'ruangan'], function () {
+        Route::get('/', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'detail']);
+        Route::get('/{id}/sarana', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'available_stocks']);
+        Route::post('/{id}/sarana/add', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'add_item']);
+    });
 });
