@@ -60,5 +60,12 @@ Route::group(['prefix' => 'persediaan'], function () {
 
 Route::group(['prefix' => 'persediaan-keluar'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\StockKeluarController::class, 'index'])->name('stock.keluar.index');
-    Route::get('/{id}', [\App\Http\Controllers\Admin\StockKeluarController::class, 'detail'])->name('stock.keluar.detail');
+    Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\StockKeluarController::class, 'detail'])->name('stock.keluar.detail');
+    Route::get('/data', [\App\Http\Controllers\Admin\StockKeluarController::class, 'data_page'])->name('stock.keluar.data');
+});
+
+Route::group(['prefix' => 'persediaan-masuk'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\StockMasukController::class, 'index'])->name('stock.masuk.index');
+    Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\StockMasukController::class, 'detail'])->name('stock.masuk.detail');
+    Route::get('/data', [\App\Http\Controllers\Admin\StockMasukController::class, 'data_page'])->name('stock.masuk.data');
 });

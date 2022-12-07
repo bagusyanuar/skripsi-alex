@@ -7,9 +7,10 @@ namespace App\Http\Controllers\Admin;
 use App\Helper\CustomController;
 use App\Models\Stock;
 use App\Models\StockKeluar;
+use App\Models\StockMasuk;
 use Illuminate\Support\Facades\DB;
 
-class StockKeluarController extends CustomController
+class StockMasukController extends CustomController
 {
     public function __construct()
     {
@@ -18,13 +19,13 @@ class StockKeluarController extends CustomController
 
     public function index()
     {
-        $data = StockKeluar::with(['sarana', 'ruangan'])->where('status', '=', 0)->get();
-        return view('admin.stock-keluar.index')->with(['data' => $data]);
+        $data = StockMasuk::with(['sarana', 'ruangan'])->where('status', '=', 0)->get();
+        return view('admin.stock-masuk.index')->with(['data' => $data]);
     }
 
     public function detail($id)
     {
-        $data = StockKeluar::with(['sarana', 'ruangan'])->where('id', '=', $id)->firstOrFail();
+        $data = StockMasuk::with(['sarana', 'ruangan'])->where('id', '=', $id)->firstOrFail();
         if ($this->request->method() === 'POST') {
             DB::beginTransaction();
             try {
@@ -44,24 +45,18 @@ class StockKeluarController extends CustomController
                         DB::rollBack();
                         return redirect()->back()->with(['failed' => 'data persediaan tidak ditemukan...']);
                     }
-
-                    if ($stock->qty < $qty) {
-                        DB::rollBack();
-                        return redirect()->back()->with(['failed' => 'persediaan tidak cukup...']);
-                    }
                     $stock->update([
-                        'qty' => ($stock->qty - $qty),
+                        'qty' => ($stock->qty + $qty),
                     ]);
                 }
-
                 DB::commit();
-                return redirect()->route('stock.keluar.index')->with(['success' => 'Berhasil konfirmasi permintaan...']);
+                return redirect()->route('stock.masuk.index')->with(['success' => 'Berhasil konfirmasi permintaan...']);
             } catch (\Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->with(['failed' => 'Terjadi Kesalahan ' . $e->getMessage()]);
             }
         }
-        return view('admin.stock-keluar.detail')->with(['data' => $data]);
+        return view('admin.stock-masuk.detail')->with(['data' => $data]);
     }
 
     public function data_page()
@@ -69,11 +64,11 @@ class StockKeluarController extends CustomController
         if ($this->request->ajax()) {
             $tgl1 = $this->field('tgl1');
             $tgl2 = $this->field('tgl2');
-            $data = StockKeluar::with(['sarana', 'ruangan'])
+            $data = StockMasuk::with(['sarana', 'ruangan'])
                 ->whereBetween('tanggal', [$tgl1, $tgl2])
                 ->get();
             return $this->basicDataTables($data);
         }
-        return view('admin.stock-keluar.data');
+        return view('admin.stock-masuk.data');
     }
 }

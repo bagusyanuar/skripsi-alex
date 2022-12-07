@@ -16,13 +16,13 @@
         </script>
     @endif
     <div class="d-flex align-items-center justify-content-between mb-3">
-        <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Permintaan Persediaan Keluar</p>
+        <p class="font-weight-bold mb-0" style="font-size: 20px">Halaman Permintaan Persediaan Masuk</p>
         <ol class="breadcrumb breadcrumb-transparent mb-0">
             <li class="breadcrumb-item">
                 <a href="{{ route('dashboard') }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{{ route('stock.keluar.index') }}">Permintaan Persediaan Keluar</a>
+                <a href="{{ route('stock.masuk.index') }}">Permintaan Persediaan Masuk</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">Detail
             </li>

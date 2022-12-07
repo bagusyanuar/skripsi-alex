@@ -107,16 +107,16 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#"
-                                   class="nav-link {{ request()->is('admin-satker/pengaduan') ? 'active' : ''}}">
+                                <a href="{{ route('stock.keluar.data') }}"
+                                   class="nav-link {{ request()->is('persediaan-keluar/data') ? 'active' : ''}}">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
                                     <p>Data</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview {{ request()->is('admin-satker/pengaduan*') ? 'menu-open' : ''}}">
-                        <a href="#" class="nav-link {{ request()->is('admin-satker/pengaduan*') ? 'active' : ''}}">
+                    <li class="nav-item has-treeview {{ request()->is('persediaan-masuk*') ? 'menu-open' : ''}}">
+                        <a href="#" class="nav-link {{ request()->is('persediaan-masuk*') ? 'active' : ''}}">
                             <i class="nav-icon fa fa-download"></i>
                             <p>
                                 Stock Masuk
@@ -125,15 +125,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="#"
-                                   class="nav-link {{ request()->is('admin-satker/pengaduan') ? 'active' : ''}}">
+                                <a href="{{ route('stock.masuk.index') }}"
+                                   class="nav-link {{ request()->is('persediaan-masuk') ? 'active' : ''}}">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
                                     <p>Permintaan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#"
-                                   class="nav-link {{ request()->is('admin-satker/pengaduan') ? 'active' : ''}}">
+                                <a href="{{ route('stock.masuk.data') }}"
+                                   class="nav-link {{ request()->is('persediaan-masuk/data') ? 'active' : ''}}">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
                                     <p>Data</p>
                                 </a>
