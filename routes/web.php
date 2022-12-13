@@ -36,6 +36,15 @@ Route::group(['prefix' => 'kelas'], function () {
     Route::post('/destroy', [\App\Http\Controllers\Admin\KelasController::class, 'destroy'])->name('kelas.destroy');
 });
 
+Route::group(['prefix' => 'mahasiswa'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\MahasiswaController::class, 'index'])->name('mahasiswa.index');
+    Route::get('/tambah', [\App\Http\Controllers\Admin\MahasiswaController::class, 'add_page'])->name('mahasiswa.add_page');
+    Route::post('/create', [\App\Http\Controllers\Admin\MahasiswaController::class, 'create'])->name('mahasiswa.create');
+    Route::get('/edit/{id}', [\App\Http\Controllers\Admin\MahasiswaController::class, 'edit_page'])->name('mahasiswa.edit');
+    Route::post('/patch', [\App\Http\Controllers\Admin\MahasiswaController::class, 'patch'])->name('mahasiswa.patch');
+    Route::post('/destroy', [\App\Http\Controllers\Admin\MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+});
+
 Route::group(['prefix' => 'ruangan'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\RuanganController::class, 'index'])->name('ruangan.index');
     Route::get('/tambah', [\App\Http\Controllers\Admin\RuanganController::class, 'add_page'])->name('ruangan.add_page');
@@ -68,4 +77,10 @@ Route::group(['prefix' => 'persediaan-masuk'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\StockMasukController::class, 'index'])->name('stock.masuk.index');
     Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\StockMasukController::class, 'detail'])->name('stock.masuk.detail');
     Route::get('/data', [\App\Http\Controllers\Admin\StockMasukController::class, 'data_page'])->name('stock.masuk.data');
+});
+
+Route::group(['prefix' => 'keluhan'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\KeluhanController::class, 'index'])->name('keluhan.index');
+    Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\KeluhanController::class, 'detail'])->name('keluhan.detail');
+    Route::get('/riwayat', [\App\Http\Controllers\Admin\KeluhanController::class, 'data_page'])->name('keluhan.data');
 });

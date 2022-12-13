@@ -39,7 +39,7 @@
                  alt="AdminLTE Logo"
                  class="brand-image"
             >
-            <span class="brand-text font-weight-light">APP</span>
+            <span class="brand-text font-weight-light">Aplikasi Sarana</span>
         </a>
         <div class="my-sidebar-menu">
             <ul class="nav nav-sidebar nav-pills flex-column">
@@ -67,6 +67,13 @@
                            class="nav-link">
                             <i class="fa fa-bookmark nav-icon" aria-hidden="true"></i>
                             <p>Kelas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('mahasiswa.index') }}"
+                           class="nav-link">
+                            <i class="fa fa-users nav-icon" aria-hidden="true"></i>
+                            <p>Mahasiswa</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -136,6 +143,31 @@
                                    class="nav-link {{ request()->is('persediaan-masuk/data') ? 'active' : ''}}">
                                     <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
                                     <p>Data</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview {{ request()->is('keluhan*') ? 'menu-open' : ''}}">
+                        <a href="#" class="nav-link {{ request()->is('keluhan*') ? 'active' : ''}}">
+                            <i class="nav-icon fa fa-comments"></i>
+                            <p>
+                                Keluhan
+                                <i class="right fa fa-angle-down"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('keluhan.index') }}"
+                                   class="nav-link {{ request()->is('keluhan') ? 'active' : ''}}">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Data</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('keluhan.data') }}"
+                                   class="nav-link {{ request()->is('keluhan/riwayat') ? 'active' : ''}}">
+                                    <i class="fa fa-circle-o nav-icon" aria-hidden="true"></i>
+                                    <p>Riwayat</p>
                                 </a>
                             </li>
                         </ul>

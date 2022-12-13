@@ -17,6 +17,13 @@
                 </li>
             </ol>
         </div>
+        <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+            <div class="text-center">
+                <img src="{{ asset('assets/icon/logo.png') }}" height="300" alt="logo">
+                <p class="font-weight-bold">Sistem Informasi Sarana dan Prasarana STMIK AUB SURAKARTA</p>
+            </div>
+
+        </div>
     </div>
 
 @endsection

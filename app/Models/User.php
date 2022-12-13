@@ -57,4 +57,9 @@ class User extends Authenticatable implements JWTSubject
         // TODO: Implement getJWTCustomClaims() method.
         return [];
     }
+
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'user_id');
+    }
 }
