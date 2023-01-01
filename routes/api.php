@@ -24,8 +24,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () 
         Route::get('/{id}/sarana', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'available_stocks']);
         Route::post('/{id}/sarana/add', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'add_item']);
         Route::match(['post', 'get'],'/{id}/sarana/keluar', [\App\Http\Controllers\Api\Admin\StockKeluarController::class, 'index']);
+        Route::get('/{id}/sarana/keluar/{id_keluar}', [\App\Http\Controllers\Api\Admin\StockKeluarController::class, 'detail']);
         Route::match(['post', 'get'],'/{id}/sarana/masuk', [\App\Http\Controllers\Api\Admin\StockMasukController::class, 'index']);
+        Route::get('/{id}/sarana/masuk/{id_masuk}', [\App\Http\Controllers\Api\Admin\StockMasukController::class, 'detail']);
     });
 
+    Route::group(['prefix' => 'stock'], function () {
+        Route::get('/by-room', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'room_stock']);
+    });
 
+});
+
+Route::group(['prefix' => 'mahasiswa', 'middleware' => ['jwt.verify']], function () {
+    Route::group(['prefix' => 'keluhan'], function () {
+
+    });
 });

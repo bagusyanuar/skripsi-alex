@@ -31,7 +31,7 @@ class RuanganController extends CustomController
     public function detail($id)
     {
         try {
-            $data = Ruangan::with(['stocks'])->where('id', '=', $id)
+            $data = Ruangan::with(['stocks.sarana'])->where('id', '=', $id)
                 ->first();
             if (!$data) {
                 return $this->jsonResponse('ruangan tidak ditemukan', 404);
@@ -45,9 +45,12 @@ class RuanganController extends CustomController
     public function available_stocks($id)
     {
         try {
+            $name = $this->field('name');
             $data = Sarana::with(['stocks' => function ($q) use ($id) {
                 return $q->where('ruangan_id', '=', $id);
-            }])->get();
+            }])
+            ->where('name', 'LIKE', '%'.$name.'%')
+            ->get();
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
             return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
@@ -69,6 +72,26 @@ class RuanganController extends CustomController
                 'qty' => 0
             ]);
             return $this->jsonResponse('success', 200);
+        } catch (\Exception $e) {
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
+        }
+    }
+
+    public function room_stock()
+    {
+        try {
+            $room_id = $this->field('room_id');
+            $name = $this->field('name');
+            $data = Stock::with(['sarana'])
+                ->whereHas('sarana', function($q) use ($name){
+                    return $q->where('name', 'LIKE', '%'.$name.'%');
+                })
+                ->where('ruangan_id', '=', $room_id)
+                ->get();
+            if (!$data) {
+                return $this->jsonResponse('ruangan tidak ditemukan', 404);
+            }
+            return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
             return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
         }

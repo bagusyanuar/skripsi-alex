@@ -40,8 +40,20 @@ class StockMasukController extends CustomController
             $end_date = $this->field('end_date') ?? Carbon::now()->format('Y-m-d');
             $data = StockMasuk::with(['sarana', 'ruangan'])
                 ->whereBetween('tanggal', [$start_date, $end_date])
-                ->where('ruangan_id', '=', $id)
+                // ->where('ruangan_id', '=', $id)
                 ->get();
+            return $this->jsonResponse('success', 200, $data);
+        } catch (\Exception $e) {
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
+        }
+    }
+    
+    public function detail($id, $id_masuk)
+    {
+        try {
+            $data = StockMasuk::with(['sarana', 'ruangan'])
+                ->where('id', '=', $id_masuk)
+                ->first();
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
             return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
