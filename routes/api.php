@@ -36,7 +36,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () 
 });
 
 Route::group(['prefix' => 'mahasiswa', 'middleware' => ['jwt.verify']], function () {
-    Route::group(['prefix' => 'keluhan'], function () {
-
-    });
+    Route::match(['post', 'get'],'/profil', [\App\Http\Controllers\Api\Mahasiswa\ProfilController::class, 'index']);
+    Route::match(['post', 'get'],'/keluhan', [\App\Http\Controllers\Api\Mahasiswa\KeluhanController::class, 'index']);
 });

@@ -64,7 +64,12 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
-
+        'keluhan' => [
+            'driver' => 'local',
+            'root' => public_path() . '/assets/keluhan',
+            'url' => env('APP_URL') . '/public',
+            'visibility' => 'public',
+        ],
     ],
 
     /*

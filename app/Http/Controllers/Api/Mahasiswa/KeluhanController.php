@@ -9,6 +9,8 @@ use App\Models\Keluhan;
 use App\Models\StockKeluar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class KeluhanController extends CustomController
 {
@@ -29,11 +31,18 @@ class KeluhanController extends CustomController
                     'keterangan' => '-',
                     'status' => 0,
                 ];
+                if ($this->request->hasFile('file')) {
+                    $file = $this->request->file('file');
+                    $name = $this->uuidGenerator() . '.' . $file->getClientOriginalExtension();
+                    $file_name = '/assets/keluhan/' . $name;
+                    Storage::disk('keluhan')->put($name, File::get($file));
+                    $data_request['file'] = $file_name;
+                }
                 Keluhan::create($data_request);
                 return $this->jsonResponse('success', 200);
             }
 
-            $data = Keluhan::with(['sarana', 'ruangan'])
+            $data = Keluhan::with(['user'])
                  ->where('user_id', '=', Auth::id())
                 ->get();
             return $this->jsonResponse('success', 200, $data);
