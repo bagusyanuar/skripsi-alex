@@ -18,6 +18,7 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']
 
 Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () {
 
+    Route::match(['post', 'get'],'/profil', [\App\Http\Controllers\Api\Admin\ProfilController::class, 'index']);
     Route::group(['prefix' => 'ruangan'], function () {
         Route::get('/', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'detail']);
