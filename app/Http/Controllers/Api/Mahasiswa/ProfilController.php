@@ -23,7 +23,7 @@ class ProfilController extends CustomController
     public function index()
     {
         try {
-            $user = User::with(['mahasiswa'])
+            $user = User::with(['mahasiswa.kelas'])
                 ->where('id', '=', Auth::id())
                 ->first();
             if (!$user) {

@@ -50,4 +50,16 @@ class KeluhanController extends CustomController
             return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
         }
     }
+
+    public function detail($id)
+    {
+        try {
+            $data = Keluhan::with(['user'])
+                ->where('id', '=', $id)
+                ->first();
+            return $this->jsonResponse('success', 200, $data);
+        } catch (\Exception $e) {
+            return $this->jsonResponse('internal server error ' . $e->getMessage(), 500);
+        }
+    }
 }
