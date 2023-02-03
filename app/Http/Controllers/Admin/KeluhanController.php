@@ -49,6 +49,7 @@ class KeluhanController extends CustomController
             $tgl2 = $this->field('tgl2');
             $data = Keluhan::with(['user.mahasiswa.kelas'])
                 ->whereBetween('tanggal', [$tgl1, $tgl2])
+                ->where('status', '!=', 0)
                 ->get();
             return $this->basicDataTables($data);
         }

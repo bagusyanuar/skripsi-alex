@@ -56,6 +56,13 @@
                         Master Data
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.index') }}"
+                           class="nav-link">
+                            <i class="fa fa-user nav-icon" aria-hidden="true"></i>
+                            <p>Admin</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('jurusan.index') }}"
                            class="nav-link">
                             <i class="fa fa-tags nav-icon" aria-hidden="true"></i>

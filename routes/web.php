@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['get', 'post'], '/', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+Route::match(['get', 'post'], '/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('dashboard');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', [\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('admin.index');
+    Route::get('/tambah', [\App\Http\Controllers\Admin\AdminController::class, 'add_page'])->name('admin.add_page');
+    Route::post('/create', [\App\Http\Controllers\Admin\AdminController::class, 'create'])->name('admin.create');
+    Route::get('/edit/{id}', [\App\Http\Controllers\Admin\AdminController::class, 'edit_page'])->name('admin.edit');
+    Route::post('/patch', [\App\Http\Controllers\Admin\AdminController::class, 'patch'])->name('admin.patch');
+    Route::post('/destroy', [\App\Http\Controllers\Admin\AdminController::class, 'destroy'])->name('admin.destroy');
+});
 
 Route::group(['prefix' => 'jurusan'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\JurusanController::class, 'index'])->name('jurusan.index');

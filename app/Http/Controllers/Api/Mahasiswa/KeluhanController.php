@@ -44,6 +44,7 @@ class KeluhanController extends CustomController
 
             $data = Keluhan::with(['user'])
                  ->where('user_id', '=', Auth::id())
+                 ->orderBy('created_at', 'DESC')
                 ->get();
             return $this->jsonResponse('success', 200, $data);
         } catch (\Exception $e) {
