@@ -19,4 +19,12 @@ class StockController extends CustomController
         $data = Stock::all();
         return view('admin.stock.index')->with(['data' => $data]);
     }
+
+    public function cetak()
+    {
+        $data = Stock::all();
+        return $this->convertToPdf('admin.cetak.stock', [
+            'data' => $data
+        ]);
+    }
 }

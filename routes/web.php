@@ -75,22 +75,26 @@ Route::group(['prefix' => 'sarana'], function () {
 
 Route::group(['prefix' => 'persediaan'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\StockController::class, 'index'])->name('stock.index');
+    Route::get('/cetak', [\App\Http\Controllers\Admin\StockController::class, 'cetak'])->name('stock.cetak');
 });
 
 Route::group(['prefix' => 'persediaan-keluar'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\StockKeluarController::class, 'index'])->name('stock.keluar.index');
     Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\StockKeluarController::class, 'detail'])->name('stock.keluar.detail');
     Route::get('/data', [\App\Http\Controllers\Admin\StockKeluarController::class, 'data_page'])->name('stock.keluar.data');
+    Route::get('/cetak', [\App\Http\Controllers\Admin\StockKeluarController::class, 'cetak'])->name('stock.keluar.cetak');
 });
 
 Route::group(['prefix' => 'persediaan-masuk'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\StockMasukController::class, 'index'])->name('stock.masuk.index');
     Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\StockMasukController::class, 'detail'])->name('stock.masuk.detail');
     Route::get('/data', [\App\Http\Controllers\Admin\StockMasukController::class, 'data_page'])->name('stock.masuk.data');
+    Route::get('/cetak', [\App\Http\Controllers\Admin\StockMasukController::class, 'cetak'])->name('stock.masuk.cetak');
 });
 
 Route::group(['prefix' => 'keluhan'], function () {
     Route::get('/', [\App\Http\Controllers\Admin\KeluhanController::class, 'index'])->name('keluhan.index');
     Route::match(['post', 'get'],'/{id}/detail', [\App\Http\Controllers\Admin\KeluhanController::class, 'detail'])->name('keluhan.detail');
     Route::get('/riwayat', [\App\Http\Controllers\Admin\KeluhanController::class, 'data_page'])->name('keluhan.data');
+    Route::get('/cetak', [\App\Http\Controllers\Admin\KeluhanController::class, 'cetak'])->name('keluhan.cetak');
 });

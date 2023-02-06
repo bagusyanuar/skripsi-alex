@@ -71,4 +71,19 @@ class StockMasukController extends CustomController
         }
         return view('admin.stock-masuk.data');
     }
+
+    public function cetak()
+    {
+        $tgl1 = $this->field('tgl1');
+        $tgl2 = $this->field('tgl2');
+        $data = StockMasuk::with(['sarana', 'ruangan'])
+            ->whereBetween('tanggal', [$tgl1, $tgl2])
+            ->get();
+        return $this->convertToPdf('admin.cetak.stock-masuk', [
+            'tgl1' => $tgl1,
+            'tgl2' => $tgl2,
+            'data' => $data,
+
+        ]);
+    }
 }

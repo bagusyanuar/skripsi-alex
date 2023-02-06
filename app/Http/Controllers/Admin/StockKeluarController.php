@@ -76,4 +76,19 @@ class StockKeluarController extends CustomController
         }
         return view('admin.stock-keluar.data');
     }
+
+    public function cetak()
+    {
+        $tgl1 = $this->field('tgl1');
+        $tgl2 = $this->field('tgl2');
+        $data = StockKeluar::with(['sarana', 'ruangan'])
+            ->whereBetween('tanggal', [$tgl1, $tgl2])
+            ->get();
+        return $this->convertToPdf('admin.cetak.stock-keluar', [
+            'tgl1' => $tgl1,
+            'tgl2' => $tgl2,
+            'data' => $data,
+
+        ]);
+    }
 }

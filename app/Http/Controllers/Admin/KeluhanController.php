@@ -55,4 +55,20 @@ class KeluhanController extends CustomController
         }
         return view('admin.keluhan.data');
     }
+
+    public function cetak()
+    {
+        $tgl1 = $this->field('tgl1');
+        $tgl2 = $this->field('tgl2');
+        $data = Keluhan::with(['user.mahasiswa.kelas'])
+            ->whereBetween('tanggal', [$tgl1, $tgl2])
+            ->where('status', '!=', 0)
+            ->get();
+        return $this->convertToPdf('admin.cetak.keluhan', [
+            'tgl1' => $tgl1,
+            'tgl2' => $tgl2,
+            'data' => $data,
+
+        ]);
+    }
 }
