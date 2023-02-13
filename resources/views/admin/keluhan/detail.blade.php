@@ -48,9 +48,12 @@
                             <textarea rows="3" class="form-control" id="deskripsi" placeholder=""
                                       name="deskripsi" readonly>{{ $data->deskripsi }}</textarea>
                         </div>
+                        <label for="file" class="form-label">Lampiran Gambar</label>
                         <div class="w-100 mb-1">
-                            <label for="file" class="form-label">Lampiran Gambar</label>
                             @if($data->file !== null)
+                                <a href="{{ $data->file }}" target="_blank">
+                                    <img src="{{ $data->file }}" height="250"/>
+                                </a>
                             @else
                                 <div class="text-center" style="height: 200px;">
                                     <p class="font-weight-bold">Tidak Ada Lampiran Gambar</p>
