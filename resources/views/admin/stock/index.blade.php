@@ -1,6 +1,13 @@
 @extends('admin.layout')
 
 @section('css')
+    <link href="{{ asset('/adminlte/plugins/select2/select2.css') }}" rel="stylesheet">
+    <style>
+        .select2-selection {
+            height: 40px !important;
+            line-height: 40px !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -21,8 +28,21 @@
     </div>
     <div class="w-100 p-2">
         <div class="text-right mb-2 pr-3">
-            <a href="{{ route('stock.cetak') }}" target="_blank" class="btn btn-success"><i class="fa fa-print mr-1"></i><span
+            <a href="{{ route('stock.cetak') }}" target="_blank" class="btn btn-success"><i
+                    class="fa fa-print mr-1"></i><span
                     class="font-weight-bold">Cetak</span></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="form-group w-100">
+                    <label for="ruangan">Ruangan</label>
+                    <select class="select2" name="ruangan" id="ruangan" style="width: 100%;">
+                        @foreach($ruangan as $v)
+                            <option value="{{ $v->id }}">{{ $v->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
         <table id="table-data" class="display w-100 table table-bordered">
             <thead>
@@ -49,6 +69,8 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('/adminlte/plugins/select2/select2.js') }}"></script>
+    <script src="{{ asset('/adminlte/plugins/select2/select2.full.js') }}"></script>
     <script src="{{ asset('/js/helper.js') }}"></script>
     <script type="text/javascript">
         function destroy(id) {
@@ -69,6 +91,9 @@
         }
 
         $(document).ready(function () {
+            $('.select2').select2({
+                width: 'resolve'
+            });
             $('#table-data').DataTable({
                 "fnDrawCallback": function (setting) {
                     eventDestroy();

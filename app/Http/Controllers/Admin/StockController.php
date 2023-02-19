@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Helper\CustomController;
+use App\Models\Ruangan;
 use App\Models\Stock;
 
 class StockController extends CustomController
@@ -17,7 +18,8 @@ class StockController extends CustomController
     public function index()
     {
         $data = Stock::all();
-        return view('admin.stock.index')->with(['data' => $data]);
+        $ruangan = Ruangan::all();
+        return view('admin.stock.index')->with(['data' => $data, 'ruangan' => $ruangan]);
     }
 
     public function cetak()
