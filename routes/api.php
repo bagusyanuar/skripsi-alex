@@ -18,15 +18,15 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']
 
 Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () {
 
-    Route::match(['post', 'get'],'/profil', [\App\Http\Controllers\Api\Admin\ProfilController::class, 'index']);
+    Route::match(['post', 'get'], '/profil', [\App\Http\Controllers\Api\Admin\ProfilController::class, 'index']);
     Route::group(['prefix' => 'ruangan'], function () {
         Route::get('/', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'detail']);
         Route::get('/{id}/sarana', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'available_stocks']);
         Route::post('/{id}/sarana/add', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'add_item']);
-        Route::match(['post', 'get'],'/{id}/sarana/keluar', [\App\Http\Controllers\Api\Admin\StockKeluarController::class, 'index']);
+        Route::match(['post', 'get'], '/{id}/sarana/keluar', [\App\Http\Controllers\Api\Admin\StockKeluarController::class, 'index']);
         Route::get('/{id}/sarana/keluar/{id_keluar}', [\App\Http\Controllers\Api\Admin\StockKeluarController::class, 'detail']);
-        Route::match(['post', 'get'],'/{id}/sarana/masuk', [\App\Http\Controllers\Api\Admin\StockMasukController::class, 'index']);
+        Route::match(['post', 'get'], '/{id}/sarana/masuk', [\App\Http\Controllers\Api\Admin\StockMasukController::class, 'index']);
         Route::get('/{id}/sarana/masuk/{id_masuk}', [\App\Http\Controllers\Api\Admin\StockMasukController::class, 'detail']);
     });
 
@@ -37,7 +37,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['jwt.verify']], function () 
 });
 
 Route::group(['prefix' => 'mahasiswa', 'middleware' => ['jwt.verify']], function () {
-    Route::match(['post', 'get'],'/profil', [\App\Http\Controllers\Api\Mahasiswa\ProfilController::class, 'index']);
-    Route::match(['post', 'get'],'/keluhan', [\App\Http\Controllers\Api\Mahasiswa\KeluhanController::class, 'index']);
+    Route::match(['post', 'get'], '/profil', [\App\Http\Controllers\Api\Mahasiswa\ProfilController::class, 'index']);
+    Route::match(['post', 'get'], '/keluhan', [\App\Http\Controllers\Api\Mahasiswa\KeluhanController::class, 'index']);
     Route::get('/keluhan/{id}', [\App\Http\Controllers\Api\Mahasiswa\KeluhanController::class, 'detail']);
+    Route::group(['prefix' => 'ruangan'], function () {
+        Route::get('/', [\App\Http\Controllers\Api\Mahasiswa\RuanganController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\Mahasiswa\RuanganController::class, 'detail']);
+    });
 });

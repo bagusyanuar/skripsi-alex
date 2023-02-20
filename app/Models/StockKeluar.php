@@ -18,6 +18,7 @@ class StockKeluar extends Model
         'keterangan',
         'status',
         'deskripsi',
+        'kondisi',
     ];
 
     public function sarana()
