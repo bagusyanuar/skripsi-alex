@@ -27,12 +27,7 @@
         </ol>
     </div>
     <div class="w-100 p-2">
-        <div class="text-right mb-2 pr-3">
-            <a href="{{ route('stock.cetak') }}" target="_blank" class="btn btn-success"><i
-                    class="fa fa-print mr-1"></i><span
-                    class="font-weight-bold">Cetak</span></a>
-        </div>
-        <div class="row">
+        <div class="row align-items-end">
             <div class="col-lg-3 col-md-6 col-sm-12">
                 <div class="form-group w-100">
                     <label for="ruangan">Ruangan</label>
@@ -43,25 +38,31 @@
                     </select>
                 </div>
             </div>
+            <div class="col-lg-9 col-md-6 col-sm-12">
+                <div class="text-right mb-2 pr-3">
+                    <a href="#" target="_blank" class="btn btn-success" id="btn-cetak"><i
+                            class="fa fa-print mr-1"></i><span
+                            class="font-weight-bold">Cetak</span></a>
+                </div>
+            </div>
         </div>
         <table id="table-data" class="display w-100 table table-bordered">
             <thead>
             <tr>
                 <th width="5%" class="text-center">#</th>
-                <th>Ruangan</th>
                 <th>Sarana / Prasarana</th>
                 <th width="12%" class="text-center">Jumlah</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($data as $v)
-                <tr>
-                    <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>
-                    <td>{{ $v->ruangan->nama }}</td>
-                    <td>{{ $v->sarana->name }}</td>
-                    <td class="text-center">{{ $v->qty }}</td>
-                </tr>
-            @endforeach
+            {{--            @foreach($data as $v)--}}
+            {{--                <tr>--}}
+            {{--                    <td width="5%" class="text-center">{{ $loop->index + 1 }}</td>--}}
+            {{--                    <td>{{ $v->ruangan->nama }}</td>--}}
+            {{--                    <td>{{ $v->sarana->name }}</td>--}}
+            {{--                    <td class="text-center">{{ $v->qty }}</td>--}}
+            {{--                </tr>--}}
+            {{--            @endforeach--}}
             </tbody>
         </table>
     </div>
@@ -90,16 +91,40 @@
             });
         }
 
+        let table;
+
+        function reload() {
+            table.ajax.reload();
+        }
+
         $(document).ready(function () {
             $('.select2').select2({
                 width: 'resolve'
             });
-            $('#table-data').DataTable({
-                "fnDrawCallback": function (setting) {
-                    eventDestroy();
+            table = DataTableGenerator('#table-data', '/{{ request()->path() }}', [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false},
+                {data: 'sarana.name'},
+                {data: 'qty'},
+            ], [
+                {
+                    targets: '_all',
+                    className: 'f12'
                 }
+            ], function (d) {
+                d.ruangan = $('#ruangan').val();
+            }, {
+                dom: 'ltipr',
             });
-            eventDestroy();
+            $('#ruangan').on('change', function () {
+                reload();
+            });
+
+            $('#btn-cetak').on('click', function (e) {
+                e.preventDefault();
+                let ruangan = $('#ruangan').val();
+                let url = '{{ route('stock.cetak') }}?ruangan=' + ruangan;
+                window.open(url, '_blank');
+            });
         });
     </script>
 @endsection

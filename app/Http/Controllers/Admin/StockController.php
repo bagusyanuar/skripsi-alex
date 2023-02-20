@@ -17,16 +17,24 @@ class StockController extends CustomController
 
     public function index()
     {
-        $data = Stock::all();
+
         $ruangan = Ruangan::all();
-        return view('admin.stock.index')->with(['data' => $data, 'ruangan' => $ruangan]);
+        if ($this->request->ajax()) {
+            $ruangan = $this->field('ruangan');
+            $data = Stock::with(['sarana'])->where('ruangan_id', '=', $ruangan)->get();
+            return $this->basicDataTables($data);
+        }
+        return view('admin.stock.index')->with(['ruangan' => $ruangan]);
     }
 
     public function cetak()
     {
-        $data = Stock::all();
+        $ruangan = $this->field('ruangan');
+        $ruangan_data = Ruangan::find($ruangan);
+        $data = Stock::with(['sarana'])->where('ruangan_id', '=', $ruangan)->get();
         return $this->convertToPdf('admin.cetak.stock', [
-            'data' => $data
+            'data' => $data,
+            'data_ruangan' => $ruangan_data
         ]);
     }
 }
