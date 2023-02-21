@@ -44,4 +44,7 @@ Route::group(['prefix' => 'mahasiswa', 'middleware' => ['jwt.verify']], function
         Route::get('/', [\App\Http\Controllers\Api\Mahasiswa\RuanganController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\Api\Mahasiswa\RuanganController::class, 'detail']);
     });
+    Route::group(['prefix' => 'stock'], function () {
+        Route::get('/by-room', [\App\Http\Controllers\Api\Admin\RuanganController::class, 'room_stock']);
+    });
 });
